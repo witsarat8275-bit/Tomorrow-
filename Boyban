@@ -1,0 +1,1567 @@
+<!DOCTYPE html>
+<html lang="th">
+<head>
+  <meta charset="UTF-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+  <title>สุขศึกษา ป.4 | การตัดสินใจสุขภาพและการรู้เท่าทันสื่อ</title>
+  <style>
+    :root {
+      --primary: #0d9488;
+      --primary-dark: #0f766e;
+      --primary-light: #ccfbf1;
+      --secondary: #0284c7;
+      --accent: #f59e0b;
+      --bg: #f0fdfa;
+      --card: #ffffff;
+      --text: #1e293b;
+      --muted: #64748b;
+      --border: #cbd5e1;
+      --success: #16a34a;
+      --success-bg: #dcfce7;
+      --danger: #dc2626;
+      --danger-bg: #fee2e2;
+      --warn-bg: #fef3c7;
+      --shadow: 0 4px 16px rgba(15, 118, 110, 0.08);
+      --radius: 14px;
+    }
+
+    * {
+      box-sizing: border-box;
+      margin: 0;
+      padding: 0;
+    }
+
+    body {
+      font-family: -apple-system, BlinkMacSystemFont, "Segoe UI", Roboto, "Noto Sans Thai", "Sarabun", Tahoma, sans-serif;
+      background: linear-gradient(135deg, #f0fdfa 0%, #e0f2fe 100%);
+      color: var(--text);
+      min-height: 100vh;
+      display: flex;
+      flex-direction: column;
+      line-height: 1.6;
+    }
+
+    header {
+      background: var(--card);
+      border-bottom: 2px solid var(--primary-light);
+      padding: 12px 20px;
+      box-shadow: 0 2px 8px rgba(0, 0, 0, 0.04);
+      position: sticky;
+      top: 0;
+      z-index: 20;
+    }
+
+    .header-inner {
+      max-width: 880px;
+      margin: 0 auto;
+      display: flex;
+      align-items: center;
+      justify-content: space-between;
+      gap: 12px;
+      flex-wrap: wrap;
+    }
+
+    .brand {
+      display: flex;
+      align-items: center;
+      gap: 10px;
+    }
+
+    .brand-icon {
+      width: 40px;
+      height: 40px;
+      border-radius: 10px;
+      background: var(--primary);
+      color: #fff;
+      display: flex;
+      align-items: center;
+      justify-content: center;
+      font-weight: 700;
+      font-size: 18px;
+      flex-shrink: 0;
+    }
+
+    .brand-title {
+      font-size: 1.05rem;
+      font-weight: 700;
+      color: var(--primary-dark);
+    }
+
+    .brand-sub {
+      font-size: 0.8rem;
+      color: var(--muted);
+    }
+
+    .btn {
+      border: none;
+      border-radius: 10px;
+      padding: 10px 18px;
+      font-size: 0.95rem;
+      font-weight: 600;
+      cursor: pointer;
+      transition: all 0.18s ease;
+      display: inline-flex;
+      align-items: center;
+      justify-content: center;
+      gap: 6px;
+      font-family: inherit;
+    }
+
+    .btn:disabled {
+      opacity: 0.5;
+      cursor: not-allowed;
+    }
+
+    .btn-primary {
+      background: var(--primary);
+      color: #fff;
+    }
+
+    .btn-primary:hover:not(:disabled) {
+      background: var(--primary-dark);
+      transform: translateY(-1px);
+    }
+
+    .btn-secondary {
+      background: #e2e8f0;
+      color: var(--text);
+    }
+
+    .btn-secondary:hover:not(:disabled) {
+      background: #cbd5e1;
+    }
+
+    .btn-teacher {
+      background: #f8fafc;
+      color: var(--secondary);
+      border: 1.5px solid #bae6fd;
+      padding: 8px 14px;
+      font-size: 0.88rem;
+    }
+
+    .btn-teacher:hover {
+      background: #e0f2fe;
+    }
+
+    main {
+      flex: 1;
+      width: 100%;
+      max-width: 880px;
+      margin: 24px auto;
+      padding: 0 16px;
+    }
+
+    .card {
+      background: var(--card);
+      border-radius: var(--radius);
+      box-shadow: var(--shadow);
+      padding: 24px;
+      margin-bottom: 20px;
+      border: 1px solid rgba(203, 213, 225, 0.6);
+    }
+
+    .hidden {
+      display: none !important;
+    }
+
+    .badge {
+      display: inline-block;
+      padding: 4px 10px;
+      border-radius: 999px;
+      font-size: 0.78rem;
+      font-weight: 600;
+      background: var(--primary-light);
+      color: var(--primary-dark);
+    }
+
+    .badge-diff {
+      background: #fef3c7;
+      color: #b45309;
+    }
+
+    .intro-grid {
+      display: grid;
+      grid-template-columns: repeat(auto-fit, minmax(180px, 1fr));
+      gap: 12px;
+      margin: 18px 0;
+    }
+
+    .info-box {
+      background: #f8fafc;
+      border: 1px solid #e2e8f0;
+      border-radius: 10px;
+      padding: 12px;
+    }
+
+    .info-box-label {
+      font-size: 0.78rem;
+      color: var(--muted);
+    }
+
+    .info-box-val {
+      font-weight: 700;
+      font-size: 0.95rem;
+      color: var(--text);
+      margin-top: 2px;
+    }
+
+    .form-group {
+      margin: 20px 0 12px;
+      max-width: 340px;
+    }
+
+    label {
+      display: block;
+      font-weight: 600;
+      margin-bottom: 6px;
+      font-size: 0.95rem;
+    }
+
+    input[type="number"] {
+      width: 100%;
+      padding: 12px 14px;
+      border: 2px solid var(--border);
+      border-radius: 10px;
+      font-size: 1.05rem;
+      font-family: inherit;
+      transition: border-color 0.2s;
+    }
+
+    input[type="number"]:focus {
+      outline: none;
+      border-color: var(--primary);
+    }
+
+    .alert-msg {
+      padding: 10px 14px;
+      border-radius: 10px;
+      font-size: 0.9rem;
+      margin-top: 10px;
+      background: var(--danger-bg);
+      color: var(--danger);
+      border: 1px solid #fecaca;
+    }
+
+    .alert-info {
+      background: #e0f2fe;
+      color: #0369a1;
+      border: 1px solid #bae6fd;
+    }
+
+    /* Quiz Top Bar */
+    .quiz-status-bar {
+      display: flex;
+      flex-wrap: wrap;
+      align-items: center;
+      justify-content: space-between;
+      gap: 12px;
+      margin-bottom: 14px;
+    }
+
+    .timer-pill {
+      background: #fef3c7;
+      color: #92400e;
+      font-weight: 700;
+      padding: 6px 14px;
+      border-radius: 999px;
+      font-size: 0.92rem;
+      border: 1px solid #fde68a;
+    }
+
+    .timer-pill.urgent {
+      background: var(--danger-bg);
+      color: var(--danger);
+      border-color: #fecaca;
+    }
+
+    .progress-wrap {
+      width: 100%;
+      height: 10px;
+      background: #e2e8f0;
+      border-radius: 999px;
+      overflow: hidden;
+      margin-bottom: 18px;
+    }
+
+    .progress-fill {
+      height: 100%;
+      background: linear-gradient(90deg, var(--primary), var(--secondary));
+      width: 20%;
+      transition: width 0.3s ease;
+    }
+
+    .q-nav-dots {
+      display: flex;
+      gap: 8px;
+      margin-bottom: 18px;
+      flex-wrap: wrap;
+    }
+
+    .q-dot {
+      width: 36px;
+      height: 36px;
+      border-radius: 50%;
+      border: 2px solid var(--border);
+      background: #fff;
+      font-weight: 700;
+      cursor: pointer;
+      color: var(--text);
+      transition: all 0.15s;
+    }
+
+    .q-dot.active {
+      border-color: var(--primary);
+      background: var(--primary);
+      color: #fff;
+    }
+
+    .q-dot.answered:not(.active) {
+      border-color: var(--primary);
+      background: var(--primary-light);
+      color: var(--primary-dark);
+    }
+
+    .scenario-box {
+      background: #f8fafc;
+      border-left: 4px solid var(--primary);
+      padding: 16px;
+      border-radius: 0 10px 10px 0;
+      margin: 14px 0;
+      font-size: 1.02rem;
+    }
+
+    .question-stem {
+      font-weight: 700;
+      font-size: 1.08rem;
+      margin: 14px 0;
+      color: #0f172a;
+    }
+
+    .options-list {
+      display: flex;
+      flex-direction: column;
+      gap: 10px;
+    }
+
+    .option-item {
+      display: flex;
+      align-items: flex-start;
+      gap: 12px;
+      padding: 14px 16px;
+      border: 2px solid #e2e8f0;
+      border-radius: 12px;
+      cursor: pointer;
+      transition: all 0.15s ease;
+      background: #fff;
+      text-align: left;
+      width: 100%;
+      font-family: inherit;
+      font-size: 0.98rem;
+      color: var(--text);
+    }
+
+    .option-item:hover:not(:disabled) {
+      border-color: var(--primary);
+      background: #f0fdfa;
+    }
+
+    .option-item.selected {
+      border-color: var(--primary);
+      background: var(--primary-light);
+      font-weight: 600;
+    }
+
+    .option-item.correct-show {
+      border-color: var(--success);
+      background: var(--success-bg);
+      color: #14532d;
+    }
+
+    .option-item.wrong-show {
+      border-color: var(--danger);
+      background: var(--danger-bg);
+      color: #7f1d1d;
+    }
+
+    .option-letter {
+      width: 30px;
+      height: 30px;
+      border-radius: 8px;
+      background: #e2e8f0;
+      color: var(--text);
+      font-weight: 700;
+      display: flex;
+      align-items: center;
+      justify-content: center;
+      flex-shrink: 0;
+    }
+
+    .option-item.selected .option-letter {
+      background: var(--primary);
+      color: #fff;
+    }
+
+    .instant-feedback {
+      margin-top: 16px;
+      padding: 14px 16px;
+      border-radius: 10px;
+      background: #f0fdf4;
+      border: 1px solid #bbf7d0;
+      font-size: 0.94rem;
+    }
+
+    .instant-feedback.needs-review {
+      background: #fffbeb;
+      border-color: #fde68a;
+    }
+
+    .quiz-actions {
+      display: flex;
+      justify-content: space-between;
+      align-items: center;
+      margin-top: 22px;
+      gap: 12px;
+      flex-wrap: wrap;
+    }
+
+    /* Results */
+    .score-hero {
+      text-align: center;
+      padding: 20px;
+      background: linear-gradient(135deg, #ccfbf1 0%, #e0f2fe 100%);
+      border-radius: 12px;
+      margin-bottom: 20px;
+    }
+
+    .score-num {
+      font-size: 2.5rem;
+      font-weight: 800;
+      color: var(--primary-dark);
+    }
+
+    .review-card {
+      border: 1px solid #e2e8f0;
+      border-radius: 12px;
+      padding: 16px;
+      margin-bottom: 14px;
+      background: #fff;
+    }
+
+    .rubric-box {
+      margin-top: 10px;
+      padding: 10px 12px;
+      background: #f8fafc;
+      border-radius: 8px;
+      border-left: 3px solid var(--secondary);
+      font-size: 0.88rem;
+      color: #334155;
+    }
+
+    /* Modal */
+    .modal-backdrop {
+      position: fixed;
+      inset: 0;
+      background: rgba(15, 23, 42, 0.55);
+      display: flex;
+      align-items: center;
+      justify-content: center;
+      padding: 16px;
+      z-index: 50;
+    }
+
+    .modal-box {
+      background: #fff;
+      border-radius: 16px;
+      max-width: 780px;
+      width: 100%;
+      max-height: 88vh;
+      display: flex;
+      flex-direction: column;
+      box-shadow: 0 20px 40px rgba(0, 0, 0, 0.2);
+      overflow: hidden;
+    }
+
+    .modal-header {
+      padding: 16px 20px;
+      border-bottom: 1px solid #e2e8f0;
+      display: flex;
+      justify-content: space-between;
+      align-items: center;
+      background: #f8fafc;
+    }
+
+    .modal-body {
+      padding: 20px;
+      overflow-y: auto;
+    }
+
+    .teacher-controls {
+      display: flex;
+      flex-wrap: wrap;
+      gap: 12px;
+      align-items: flex-end;
+      margin-bottom: 16px;
+      padding-bottom: 16px;
+      border-bottom: 1px solid #e2e8f0;
+    }
+
+    .stat-pill {
+      background: #f1f5f9;
+      padding: 8px 12px;
+      border-radius: 8px;
+      font-size: 0.85rem;
+      color: #334155;
+    }
+
+    footer {
+      text-align: center;
+      padding: 18px 16px;
+      font-size: 0.85rem;
+      color: var(--muted);
+      border-top: 1px solid #e2e8f0;
+      background: rgba(255, 255, 255, 0.75);
+      margin-top: auto;
+    }
+
+    @media (max-width: 600px) {
+      .card {
+        padding: 18px;
+      }
+      .score-num {
+        font-size: 2rem;
+      }
+    }
+  </style>
+</head>
+<body>
+  <header>
+    <div class="header-inner">
+      <div class="brand">
+        <div class="brand-icon" aria-hidden="true">สข</div>
+        <div>
+          <div class="brand-title">สุขศึกษา ป.4 | การตัดสินใจสุขภาพและการรู้เท่าทันสื่อ</div>
+          <div class="brand-sub">ผู้สร้าง: Boyban | โรงเรียน: ยปป</div>
+        </div>
+      </div>
+      <button type="button" id="openTeacherBtn" class="btn btn-teacher">โหมดครู</button>
+    </div>
+  </header>
+
+  <main>
+    <!-- หน้าแรก: รับเลขที่นักเรียน -->
+    <section id="startSection" class="card">
+      <span class="badge">กลุ่มสาระการเรียนรู้สุขศึกษาและพลศึกษา • ชั้นประถมศึกษาปีที่ 4</span>
+      <h1 style="font-size: 1.45rem; margin: 10px 0 8px; color: #0f172a;">
+        กิจกรรมฝึกทักษะ: เลือกอย่างฉลาด ปลอดภัย และรู้เท่าทันโฆษณา
+      </h1>
+      <p style="color: var(--muted); font-size: 0.96rem;">
+        ฝึกประเมินความเสี่ยงจากสถานการณ์ใกล้ตัว เลือกแนวทางดูแลสุขภาพที่ปลอดภัยเหมาะสมกับวัย และเรียนรู้เหตุผลสนับสนุนการตัดสินใจอย่างสร้างสรรค์
+      </p>
+
+      <div class="intro-grid">
+        <div class="info-box">
+          <div class="info-box-label">รูปแบบกิจกรรม</div>
+          <div class="info-box-val">ปรนัย 4 ตัวเลือก (5 ข้อ)</div>
+        </div>
+        <div class="info-box">
+          <div class="info-box-label">เวลาแนะนำ</div>
+          <div class="info-box-val">10 นาที (ไล่ระดับง่ายไปยาก)</div>
+        </div>
+        <div class="info-box">
+          <div class="info-box-label">โหมดการเรียนรู้</div>
+          <div class="info-box-val">โหมดฝึกซ้อม (ทำซ้ำได้ พร้อมเฉลย)</div>
+        </div>
+      </div>
+
+      <div class="form-group">
+        <label for="studentNoInput">กรอกเลขที่ของนักเรียน (เลขที่ 1 – 11)</label>
+        <input type="number" id="studentNoInput" min="1" max="11" placeholder="ระบุเลขที่ เช่น 1 ถึง 11" />
+        <div id="startErrorMsg" class="alert-msg hidden" role="alert"></div>
+      </div>
+
+      <div style="display: flex; gap: 10px; flex-wrap: wrap; margin-top: 14px;">
+        <button type="button" id="startQuizBtn" class="btn btn-primary">เริ่มทำกิจกรรม</button>
+      </div>
+    </section>
+
+    <!-- หน้าทำแบบฝึกหัด -->
+    <section id="quizSection" class="card hidden">
+      <div class="quiz-status-bar">
+        <div>
+          <span class="badge" id="studentBadge">นักเรียนเลขที่ -</span>
+          <span class="badge badge-diff" id="diffBadge" style="margin-left: 6px;">ระดับความยาก 1/5</span>
+        </div>
+        <div class="timer-pill" id="timerDisplay">เวลาที่เหลือ 10:00</div>
+      </div>
+
+      <div class="progress-wrap" aria-label="ความคืบหน้าการทำกิจกรรม">
+        <div class="progress-fill" id="progressFill"></div>
+      </div>
+
+      <div class="q-nav-dots" id="qNavDots" aria-label="เลือกข้อคำถาม"></div>
+
+      <div>
+        <div style="font-size: 0.85rem; color: var(--muted); font-weight: 600;" id="topicTag">หัวข้อย่อย</div>
+        <div class="scenario-box" id="scenarioText"></div>
+        <div class="question-stem" id="questionStem"></div>
+        <div class="options-list" id="optionsContainer"></div>
+
+        <!-- แสดงคำอธิบายเหตุผลทันทีหลังเลือกตอบ -->
+        <div id="instantFeedbackBox" class="instant-feedback hidden"></div>
+      </div>
+
+      <div id="quizWarnMsg" class="alert-msg hidden" role="alert"></div>
+
+      <div class="quiz-actions">
+        <button type="button" id="prevBtn" class="btn btn-secondary">← ข้อก่อนหน้า</button>
+        <div style="display: flex; gap: 10px; flex-wrap: wrap;">
+          <button type="button" id="nextBtn" class="btn btn-primary">ข้อถัดไป →</button>
+          <button type="button" id="submitBtn" class="btn btn-primary hidden">ตรวจ/ส่งคำตอบ</button>
+        </div>
+      </div>
+    </section>
+
+    <!-- หน้าสรุปผลและเฉลย -->
+    <section id="resultSection" class="card hidden">
+      <div class="score-hero">
+        <div style="font-size: 0.92rem; font-weight: 600; color: var(--primary-dark);" id="resultStudentLabel">ผลการฝึกทักษะ</div>
+        <div class="score-num" id="scoreDisplay">0 / 5 คะแนน</div>
+        <p id="encouragementText" style="margin-top: 6px; font-weight: 500; color: #1e293b;"></p>
+      </div>
+
+      <h2 style="font-size: 1.15rem; margin-bottom: 12px; color: #0f172a;">เฉลยละเอียด คำอธิบาย และเกณฑ์เหตุผล (Rubric)</h2>
+      <div id="reviewContainer"></div>
+
+      <div style="display: flex; gap: 12px; flex-wrap: wrap; margin-top: 20px;">
+        <button type="button" id="retryBtn" class="btn btn-primary">ลองทำใหม่อีกครั้ง (เลขที่เดิม)</button>
+        <button type="button" id="changeStudentBtn" class="btn btn-secondary">เปลี่ยนเลขที่นักเรียน</button>
+      </div>
+    </section>
+  </main>
+
+  <!-- Modal โหมดครู -->
+  <div id="teacherModal" class="modal-backdrop hidden" role="dialog" aria-modal="true" aria-labelledby="teacherModalTitle">
+    <div class="modal-box">
+      <div class="modal-header">
+        <div>
+          <h2 id="teacherModalTitle" style="font-size: 1.1rem; color: #0f172a;">โหมดครู: ตรวจสอบชุดโจทย์และเฉลยรายเลขที่</h2>
+          <div style="font-size: 0.8rem; color: var(--muted);">Strategy C (Case-Based Variation) • Deterministic Seed (เลขที่ 1–11)</div>
+        </div>
+        <button type="button" id="closeTeacherBtn" class="btn btn-secondary" style="padding: 6px 12px;">ปิดหน้าต่าง</button>
+      </div>
+      <div class="modal-body">
+        <div class="alert-msg alert-info" style="margin-top: 0; margin-bottom: 14px;">
+          หมายเหตุ: เว็บแอปแบบทำงานฝั่งเบราว์เซอร์ (Client-Side) ไม่สามารถซ่อนข้อมูลเฉลยจากโค้ดเบราว์เซอร์ได้ 100% โปรดตรวจสอบความถูกต้องของโจทย์และเฉลยก่อนนำไปใช้จริงในชั้นเรียน
+        </div>
+
+        <div class="teacher-controls">
+          <div>
+            <label for="teacherStudentSelect" style="font-size: 0.88rem;">เลือกเลขที่นักเรียน (1–11)</label>
+            <input type="number" id="teacherStudentSelect" min="1" max="11" value="1" style="width: 130px; padding: 8px 12px;" />
+          </div>
+          <button type="button" id="teacherInspectBtn" class="btn btn-primary" style="padding: 9px 16px;">แสดงโจทย์และเฉลย</button>
+          <div class="stat-pill" id="uniquenessStat">กำลังคำนวณอัตราความหลากหลาย...</div>
+        </div>
+
+        <div id="teacherPreviewContainer"></div>
+      </div>
+    </div>
+  </div>
+
+  <footer>
+    วิชาสุขศึกษา ชั้นประถมศึกษาปีที่ 4 • ผู้สร้าง: Boyban • โรงเรียน: ยปป
+  </footer>
+
+  <script>
+    (function () {
+      "use strict";
+
+      // =========================================================================
+      // 1. Deterministic PRNG (Mulberry32) — ไม่มี Math.random() แบบไร้ Seed
+      // =========================================================================
+      function mulberry32(seed) {
+        let t = seed >>> 0;
+        return function () {
+          t += 0x6D2B79F5;
+          let r = Math.imul(t ^ (t >>> 15), 1 | t);
+          r ^= r + Math.imul(r ^ (r >>> 7), 61 | r);
+          return ((r ^ (r >>> 14)) >>> 0) / 4294967296;
+        };
+      }
+
+      function computeSeed(studentNo, questionIndex, salt) {
+        // ผสมเลขที่นักเรียน หมายเลขข้อ และค่าคงที่ให้กระจายตัวสูงและทำซ้ำได้ 100%
+        let h = 2166136261 >>> 0;
+        const inputs = [studentNo * 131 + 17, questionIndex * 977 + 31, salt * 3571 + 7];
+        for (let i = 0; i < inputs.length; i++) {
+          h ^= inputs[i];
+          h = Math.imul(h, 16777619) >>> 0;
+        }
+        return h >>> 0;
+      }
+
+      function seededShuffle(array, seed) {
+        const rng = mulberry32(seed);
+        const copy = array.slice();
+        for (let i = copy.length - 1; i > 0; i--) {
+          const j = Math.floor(rng() * (i + 1));
+          const temp = copy[i];
+          copy[i] = copy[j];
+          copy[j] = temp;
+        }
+        return copy;
+      }
+
+      // =========================================================================
+      // 2. คลังสถานการณ์ตามหลัก Strategy C (Case-Based Variation)
+      //    5 ข้อ ไล่ระดับง่ายไปยาก (Level 1 -> Level 5)
+      //    แต่ละข้อมี 4 กรณีศึกษาที่ซับซ้อนเท่ากันและใช้หลักวิชาการสุขศึกษา ป.4 เดียวกัน
+      // =========================================================================
+      const QUESTION_BANK = [
+        // ข้อ 1 (ระดับ 1 - ง่าย): การพักผ่อนและสุขอนามัยการนอนหลับ (เด็กวัยเรียน ป.4 ควรนอน 9-11 ชม.)
+        {
+          level: 1,
+          difficultyLabel: "ระดับ 1/5 (พื้นฐาน)",
+          topic: "การดูแลสุขภาพตนเองและการพักผ่อนให้เพียงพอ",
+          rubric: "เกณฑ์เหตุผล: ระบุได้ว่าเด็กวัยเรียน ป.4 ต้องการการนอนหลับอย่างเพียงพอ (ประมาณ 9–11 ชั่วโมงต่อคืน) เพื่อการเจริญเติบโตของร่างกาย สมองปลอดโปร่ง และลดอุบัติเหตุหรือความง่วงระหว่างเรียน",
+          cases: [
+            {
+              scenario: "เวลา 22.30 น. คืนวันอาทิตย์ บอสกำลังสนุกกับการเล่นเกมออนไลน์กับรุ่นพี่ในกลุ่มแชต ทั้งที่พรุ่งนี้เช้ามีเรียนวิชาแรกเวลา 08.00 น. และต้องตื่นเวลา 06.00 น.",
+              stem: "การตัดสินใจใดเหมาะสมและส่งผลดีต่อสุขภาพของบอสมากที่สุด?",
+              options: [
+                { text: "บอกลาเพื่อนอย่างสุภาพ ปิดหน้าจอ และเข้านอนทันทีเพื่อให้ร่างกายได้พักผ่อนเพียงพอ", isCorrect: true },
+                { text: "เล่นต่อจนถึงเที่ยงคืน แล้วค่อยชงเครื่องดื่มชูกำลังดื่มในตอนเช้าเพื่อให้ไม่ง่วง", isCorrect: false },
+                { text: "แอบเปิดเสียงเบา ๆ เล่นใต้ผ้าห่มต่ออีก 2 ชั่วโมง เพราะพรุ่งนี้ค่อยไปงีบหลับในห้องเรียน", isCorrect: false },
+                { text: "เล่นต่อจนจบด่านใหญ่ตอนตีหนึ่ง แล้วงดอาหารเช้าเพื่อจะได้ตื่นสายขึ้นอีก 30 นาที", isCorrect: false }
+              ],
+              explanation: "เด็กวัยประถมศึกษาต้องการการนอนหลับวันละ 9–11 ชั่วโมง การหยุดเล่นและเข้านอนช่วยให้โกรทฮอร์โมนทำงานเต็มที่ สมองพร้อมเรียนรู้ ส่วนเครื่องดื่มชูกำลังไม่เหมาะกับเด็กและการงดอาหารเช้าทำให้ขาดพลังงาน"
+            },
+            {
+              scenario: "แพรวชอบดูคลิปวิดีโอสั้นบนแท็บเล็ตก่อนนอน จนเลยเวลา 23.00 น. ทำให้ช่วงเช้าแพรวมักปวดศีรษะ อ่อนเพลีย และไม่มีสมาธิฟังคุณครูอธิบายบทเรียน",
+              stem: "แนวทางปฏิบัติใดช่วยแก้ปัญหาสุขภาพของแพรวได้ถูกต้องตามหลักสุขบัญญัติ?",
+              options: [
+                { text: "กำหนดเวลาวางอุปกรณ์อิเล็กทรอนิกส์ก่อนนอนอย่างน้อย 30–60 นาที และเข้านอนให้ตรงเวลา", isCorrect: true },
+                { text: "ดื่มกาแฟเย็นของพี่สาวก่อนไปโรงเรียนทุกเช้าเพื่อกระตุ้นให้สมองตื่นตัว", isCorrect: false },
+                { text: "เปิดไฟสว่างจ้าไว้ตลอดคืนขณะนอนหลับ จะได้ตื่นง่ายและไม่รู้สึกง่วงตอนเช้า", isCorrect: false },
+                { text: "ดูคลิปดึกเหมือนเดิมในวันธรรมดา แล้วค่อยนอนชดเชยทีเดียว 15 ชั่วโมงในวันเสาร์", isCorrect: false }
+              ],
+              explanation: "แสงสีฟ้าจากหน้าจอรบกวนการหลั่งสารเมลาโทนินทำให้หลับยาก การงดใช้จอก่อนนอนและเข้านอนเป็นเวลาช่วยให้หลับลึกและฟื้นฟูร่างกายได้จริง ส่วนคาเฟอีนไม่เหมาะสมกับเด็กวัยเรียน"
+            },
+            {
+              scenario: "ต้นกล้าต้องตื่นเวลา 05.45 น. เพื่อขึ้นรถโรงเรียน แต่คืนนี้เพื่อนชวนคุยเรื่องการ์ตูนในกลุ่มแชตจนเกือบห้าทุ่ม ต้นกล้ารู้สึกเริ่มง่วงแต่กลัวคุยกับเพื่อนไม่รู้เรื่อง",
+              stem: "ต้นกล้าควรตัดสินใจอย่างไรจึงจะดูแลสุขภาพตนเองได้อย่างเหมาะสม?",
+              options: [
+                { text: "ขอตัวเข้านอนก่อนและบอกเพื่อนว่าจะมาคุยต่อในเวลาพักกลางวันพรุ่งนี้", isCorrect: true },
+                { text: "ฝืนถ่างตาคุยต่อจนเพื่อนทุกคนหลับหมด เพื่อแสดงว่าตนเองเป็นคนนอนดึกเก่ง", isCorrect: false },
+                { text: "กินขนมหวานและน้ำอัดลมตอนดึกเพื่อให้น้ำตาลช่วยให้ตาสว่างคุยต่อได้", isCorrect: false },
+                { text: "นอนหลับไปพร้อมเปิดหน้าจอแชตทิ้งไว้ข้างหมอนเพื่อให้สะดุ้งตื่นมาตอบทุกครั้ง", isCorrect: false }
+              ],
+              explanation: "การบอกเพื่อนอย่างสุภาพและเข้านอนตามเวลาช่วยรักษาความสัมพันธ์ที่ดีไปพร้อมกับการดูแลสุขภาพ ขณะที่การกินน้ำตาลตอนดึกและการถูกรบกวนขณะหลับทำลายคุณภาพการนอน"
+            },
+            {
+              scenario: "เมย์อยากอ่านนิยายให้จบเล่มภายในคืนเดียวทั้งที่พรุ่งนี้มีการทดสอบสมรรถภาพทางกาย (วิ่งเก็บของและลุกนั่ง) ในชั่วโมงพลศึกษา",
+              stem: "การตัดสินใจใดปลอดภัยและส่งผลดีต่อร่างกายของเมย์มากที่สุด?",
+              options: [
+                { text: "คั่นหน้าหนังสือไว้แล้วเข้านอนตามเวลาปกติ เพื่อให้กล้ามเนื้อและหัวใจพร้อมออกกำลังกาย", isCorrect: true },
+                { text: "อ่านต่อจนถึงตีสอง เพราะการออกกำลังกายใช้แค่แรงขา ไม่เกี่ยวกับการนอนหลับ", isCorrect: false },
+                { text: "อดนอนอ่านให้จบ แล้วดื่มน้ำหวานอัดแก๊สก่อนลงสนามทดสอบเพื่อเพิ่มแรงวิ่ง", isCorrect: false },
+                { text: "นอนเพียง 3 ชั่วโมง แล้ววิ่งให้เร็วที่สุดตั้งแต่เริ่มเพื่อจะได้รีบมานั่งพัก", isCorrect: false }
+              ],
+              explanation: "การพักผ่อนไม่เพียงพอทำให้อัตราการเต้นของหัวใจเหนื่อยง่ายกว่าปกติ กล้ามเนื้อฟื้นตัวไม่ทัน และเสี่ยงหน้ามืดขณะทดสอบสมรรถภาพทางกาย การนอนให้เพียงพอจึงสำคัญมาก"
+            }
+          ]
+        },
+
+        // ข้อ 2 (ระดับ 2 - ค่อนข้างง่าย): โภชนาการและการเลือกเครื่องดื่ม/อาหารว่างที่ดีต่อสุขภาพ
+        {
+          level: 2,
+          difficultyLabel: "ระดับ 2/5 (เข้าใจหลักสุขภาพ)",
+          topic: "การเลือกรับประทานอาหารและเครื่องดื่มที่เหมาะสมกับวัย",
+          rubric: "เกณฑ์เหตุผล: พิจารณาคุณค่าทางโภชนาการ ปริมาณน้ำตาล/โซเดียม/คาเฟอีน และความเหมาะสมกับเด็กวัยเจริญเติบโต แทนการเลือกตามความนิยมหรือความหวานจัด",
+          cases: [
+            {
+              scenario: "หลังเลิกเรียน อากาศร้อนจัด กลุ่มเพื่อนชวนกันไปซื้อชานมไข่มุกแก้วใหญ่เพิ่มความหวานพิเศษดื่มทุกวัน แต่ปั้นสังเกตว่าช่วงนี้ตนเองเริ่มฟันผุและอิ่มจนกินข้าวเย็นไม่ลง",
+              stem: "ปั้นควรตัดสินใจเลือกปฏิบัติอย่างไรจึงจะเหมาะสมกับสุขภาพมากที่สุด?",
+              options: [
+                { text: "เลือกดื่มน้ำเปล่าหรือนมจืดแทน และนาน ๆ ครั้งจึงดื่มเครื่องดื่มหวานโดยสั่งหวานน้อย", isCorrect: true },
+                { text: "ดื่มชานมไข่มุกแก้วใหญ่ทุกวันเหมือนเดิม แต่ใช้วิธีงดข้าวเย็นเพื่อไม่ให้น้ำหนักเพิ่ม", isCorrect: false },
+                { text: "เปลี่ยนไปดื่มน้ำอัดลมสีดำวันละ 2 กระป๋องแทน เพราะไม่มีไข่มุกจึงไม่อ้วน", isCorrect: false },
+                { text: "ดื่มชานมไข่มุกทุกวันตามเพื่อน แล้วค่อยแปรงฟันแรง ๆ วันละ 5 ครั้งเพื่อแก้ฟันผุ", isCorrect: false }
+              ],
+              explanation: "ชานมไข่มุกและน้ำอัดลมมีน้ำตาลสูงมาก การดื่มทุกวันเสี่ยงโรคอ้วนและฟันผุ รวมถึงทำให้เบื่ออาหารมื้อหลัก การเลือกน้ำเปล่าหรือนมจืดช่วยเสริมแคลเซียมและดีต่อสุขภาพฟัน"
+            },
+            {
+              scenario: "ร้านค้าหน้าโรงเรียนนำขนมกรุบกรอบรสเผ็ดจัดซองใหญ่มาขายพร้อมของแถมสติกเกอร์สะสม เพื่อนหลายคนซื้อกินเป็นอาหารเช้าแทนข้าว",
+              stem: "หากนักเรียนต้องการมีพลังงานเรียนหนังสือตลอดช่วงเช้า ควรตัดสินใจอย่างไร?",
+              options: [
+                { text: "รับประทานอาหารเช้าที่มีประโยชน์ครบหมู่ เช่น ข้าวต้มหรือแซนด์วิชไข่ และไม่ซื้อขนมกินแทนมื้อหลัก", isCorrect: true },
+                { text: "ซื้อขนมกรุบกรอบมากินกับน้ำหวาน เพราะให้พลังงานเร็วและได้สติกเกอร์ครบชุด", isCorrect: false },
+                { text: "กินขนมกรุบกรอบ 2 ซองตอนเช้า แล้วดื่มน้ำตามเยอะ ๆ เพื่อล้างผงปรุงรสออก", isCorrect: false },
+                { text: "ไม่กินอาหารเช้าเลย เพื่อเก็บเงินค่าขนมไว้ซื้อของเล่นหลังเลิกเรียน", isCorrect: false }
+              ],
+              explanation: "ขนมกรุบกรอบมีโซเดียมและไขมันสูง แต่ขาดโปรตีนและวิตามินที่จำเป็นต่อสมองในวัยเรียน การกินอาหารเช้าที่มีประโยชน์ช่วยให้สมองทำงานได้ดีและไม่ระคายเคืองกระเพาะอาหาร"
+            },
+            {
+              scenario: "รุ่นพี่ในทีมฟุตบอลยื่นเครื่องดื่มผสมคาเฟอีน (เครื่องดื่มชูกำลัง) ให้ดิวลองดื่มก่อนลงแข่ง โดยบอกว่าดื่มแล้วจะวิ่งไม่เหนื่อย",
+              stem: "ดิวควรตัดสินใจอย่างไรจึงจะปลอดภัยตามหลักสาธารณสุข?",
+              options: [
+                { text: "ปฏิเสธอย่างสุภาพ และเลือกดื่มน้ำสะอาดในปริมาณพอเหมาะแทนเพราะเครื่องดื่มชูกำลังไม่เหมาะกับเด็ก", isCorrect: true },
+                { text: "รับมาดื่มครึ่งขวด เพราะเล่นกีฬาหนักจึงต้องการคาเฟอีนมาบำรุงหัวใจ", isCorrect: false },
+                { text: "ดื่มจนหมดขวดเพื่อให้วิ่งแซงคู่แข่งได้ตลอดทั้งเกม", isCorrect: false },
+                { text: "ผสมเครื่องดื่มชูกำลังกับน้ำอัดลมเพื่อลดความเข้มข้นแล้วค่อยดื่ม", isCorrect: false }
+              ],
+              explanation: "เครื่องดื่มชูกำลังมีคาเฟอีนและน้ำตาลสูง ซึ่งเด็กไม่ควรดื่มเพราะอาจทำให้ใจสั่น ความดันโลหิตสูง นอนไม่หลับ และเสี่ยงอันตรายขณะออกกำลังกายหนัก น้ำสะอาดดีที่สุด"
+            },
+            {
+              scenario: "น้ำหวานเห็นเพื่อนหลายคนนิยมซื้อเยลลี่สีสดใสบรรจุถุงไม่มีฉลากภาษาไทยและไม่มีเลขสารบบอาหาร (อย.) มาแบ่งกันกินหลังเลิกเรียน",
+              stem: "น้ำหวานควรประเมินความเสี่ยงและตัดสินใจอย่างไร?",
+              options: [
+                { text: "ไม่ซื้อและไม่รับประทาน เพราะอาหารที่ไม่มีฉลากและ อย. อาจปนเปื้อนสีหรือสารเคมีที่เป็นอันตราย", isCorrect: true },
+                { text: "ลองกินดูก่อน 1 ชิ้น ถ้าไม่ปวดท้องภายใน 10 นาทีแสดงว่าปลอดภัยกินต่อได้", isCorrect: false },
+                { text: "เลือกกินเฉพาะชิ้นที่มีสีอ่อน ๆ เพราะสีอ่อนไม่มีสารเคมีเจือปน", isCorrect: false },
+                { text: "ซื้อมากินตามเพื่อนเพื่อไม่ให้ถูกมองว่าเรื่องมากเรื่องอาหารการกิน", isCorrect: false }
+              ],
+              explanation: "อาหารที่ไม่มีฉลากภาษาไทยและไม่มีเครื่องหมาย อย. ไม่สามารถตรวจสอบแหล่งผลิตและส่วนผสมได้ อาจมีสีสังเคราะห์หรือสารกันบูดเกินมาตรฐานที่เป็นอันตรายต่อตับและไต"
+            }
+          ]
+        },
+
+        // ข้อ 3 (ระดับ 3 - ปานกลาง): ทักษะการปฏิเสธแรงกดดันจากเพื่อนอย่างสร้างสรรค์และปลอดภัย
+        {
+          level: 3,
+          difficultyLabel: "ระดับ 3/5 (ทักษะการปฏิเสธ)",
+          topic: "การปฏิเสธพฤติกรรมเสี่ยงและแรงกดดันจากกลุ่มเพื่อน",
+          rubric: "เกณฑ์เหตุผล: ใช้ทักษะการปฏิเสธที่สุภาพ ชัดเจน มั่นคง ไม่ก้าวร้าว และแยกตัวออกจากสถานการณ์เสี่ยงอย่างปลอดภัย โดยไม่คล้อยตามคำท้าทาย",
+          cases: [
+            {
+              scenario: "หลังเลิกเรียน เพื่อนกลุ่มหนึ่งชวนเก่งแอบไปเล่นน้ำในคลองหลังหมู่บ้านซึ่งน้ำลึกและไม่มีผู้ใหญ่ดูแล พร้อมพูดท้าทายว่า 'ถ้าไม่กล้าไปก็ไม่ใช่เพื่อนกัน'",
+              stem: "การตอบสนองและตัดสินใจใดแสดงถึงทักษะการปฏิเสธที่ปลอดภัยและเหมาะสมที่สุด?",
+              options: [
+                { text: "พูดปฏิเสธอย่างหนักแน่นว่า 'เราไม่ไปนะ น้ำลึกอันตรายมาก ไปเล่นสนามเด็กเล่นกันดีกว่า' แล้วเดินออกมา", isCorrect: true },
+                { text: "ยอมไปด้วยแต่ยืนดูอยู่ริมตลิ่ง เพื่อพิสูจน์ว่าตนเองกล้าและไม่เสียเพื่อน", isCorrect: false },
+                { text: "ด่าทอเพื่อนด้วยถ้อยคำรุนแรงว่าชวนทำเรื่องโง่ ๆ แล้วผลักเพื่อนออก", isCorrect: false },
+                { text: "แอบตามไปลงเล่นน้ำด้วยเพราะกลัวถูกเพื่อนล้อเลียนในวันพรุ่งนี้", isCorrect: false }
+              ],
+              explanation: "การจมน้ำเป็นสาเหตุการเสียชีวิตอันดับต้น ๆ ของเด็กวัยเรียน การปฏิเสธด้วยน้ำเสียงหนักแน่น สุภาพ พร้อมเสนอทางเลือกที่ปลอดภัยและเดินออกจากจุดเสี่ยงช่วยรักษาชีวิตโดยไม่สร้างความขัดแย้งรุนแรง"
+            },
+            {
+              scenario: "ในห้องน้ำโรงเรียน มีรุ่นพี่หยิบบุหรี่ไฟฟ้ากลิ่นผลไม้ออกมาสูบ แล้วชวนภูมิลองสูบโดยบอกว่า 'นี่แค่ไอน้ำหอม ๆ ไม่ใช่บุหรี่จริง ไม่ติดหรอก'",
+              stem: "ภูมิควรตัดสินใจอย่างไรจึงจะถูกต้องและปลอดภัยที่สุด?",
+              options: [
+                { text: "ปฏิเสธทันทีว่า 'ไม่ครับ ผมไม่สูบ' แล้วรีบเดินออกจากบริเวณนั้นไปแจ้งคุณครู", isCorrect: true },
+                { text: "ลองสูบแค่ 1 ครั้งแล้วรีบพ่นควันออกทันที จะได้ไม่เกิดอันตรายต่อปอด", isCorrect: false },
+                { text: "รับมาถือไว้เฉย ๆ เพื่อให้รุ่นพี่พอใจ แต่แอบกลั้นหายใจไม่สูดควันเข้าปอด", isCorrect: false },
+                { text: "ยืนคุยในห้องน้ำต่อเพื่อขอให้รุ่นพี่เล่าว่าซื้อมาจากที่ไหน", isCorrect: false }
+              ],
+              explanation: "บุหรี่ไฟฟ้ามีสารนิโคตินที่เสพติดง่ายและทำลายพัฒนาการสมองและปอดของเด็ก แม้สูดเพียงเล็กน้อยหรืออยู่ใกล้ควันมือสองก็เป็นอันตราย การปฏิเสธทันทีและแจ้งผู้ใหญ่คือวิธีที่ปลอดภัยที่สุด"
+            },
+            {
+              scenario: "ระหว่างรอผู้ปกครองมารับ เพื่อนชวนฟ้าปั่นจักรยานแข่งกันบนถนนใหญ่ที่มีรถยนต์วิ่งเร็ว โดยบอกว่า 'ถนนโล่งนิดเดียว แป๊บเดียวก็ถึงปากซอย'",
+              stem: "ฟ้าควรใช้ทักษะการปฏิเสธอย่างไรจึงจะเหมาะสม?",
+              options: [
+                { text: "ปฏิเสธอย่างชัดเจนว่า 'ไม่เอาดีกว่า ถนนใหญ่รถวิ่งเร็ว อันตรายมาก รอผู้ปกครองตรงนี้ปลอดภัยกว่า'", isCorrect: true },
+                { text: "ปั่นแข่งไปด้วยแต่สัญญาว่าจะปั่นชิดขอบทางให้มากที่สุด", isCorrect: false },
+                { text: "ยอมซ้อนท้ายเพื่อนแทนการปั่นเอง จะได้ไม่ต้องบังคับแฮนด์จักรยาน", isCorrect: false },
+                { text: "ท้าเพื่อนให้ไปปั่นบนทางเท้าแทนโดยปั่นให้เร็วที่สุดแข่งกัน", isCorrect: false }
+              ],
+              explanation: "การแข่งจักรยานบนถนนใหญ่เสี่ยงต่ออุบัติเหตุรุนแรง การปฏิเสธตรงไปตรงมาโดยชี้ให้เห็นอันตรายและชวนรอในจุดปลอดภัยเป็นการป้องกันอุบัติเหตุที่ดี"
+            },
+            {
+              scenario: "เพื่อนสนิทชวนใบเตยแอบนำโทรศัพท์มือถือขึ้นมาถ่ายคลิปแกล้งเพื่อนอีกคนในห้องเรียนเพื่อนำไปโพสต์ลงโซเชียลให้คนกดขำ",
+              stem: "ใบเตยควรตัดสินใจอย่างไรจึงจะแสดงความรับผิดชอบและไม่ทำร้ายผู้อื่น?",
+              options: [
+                { text: "ปฏิเสธไม่ร่วมถ่ายคลิปและเตือนเพื่อนว่าการแกล้งผู้อื่นออนไลน์ทำให้เพื่อนเสียใจและผิดกฎโรงเรียน", isCorrect: true },
+                { text: "ช่วยถือกล้องถ่ายให้แต่ไม่ยอมเป็นคนโพสต์เอง จะได้ถือว่าไม่มีความผิด", isCorrect: false },
+                { text: "ถ่ายคลิปไว้ดูกันเฉพาะในกลุ่มแชต 5 คน เพราะไม่ได้เปิดเป็นสาธารณะ", isCorrect: false },
+                { text: "ยอมถ่ายให้ครั้งนี้ก่อน แล้วค่อยแอบไปขอโทษเพื่อนที่ถูกแกล้งทีหลัง", isCorrect: false }
+              ],
+              explanation: "การกลั่นแกล้งบนโลกออนไลน์ (Cyberbullying) ส่งผลกระทบต่อสุขภาพจิตของผู้อื่นอย่างรุนแรง การปฏิเสธไม่ร่วมมือและช่วยเตือนสติเพื่อนอย่างสร้างสรรค์ช่วยยุติพฤติกรรมเสี่ยงได้"
+            }
+          ]
+        },
+
+        // ข้อ 4 (ระดับ 4 - ค่อนข้างยาก): การรู้เท่าทันสื่อโฆษณาผลิตภัณฑ์สุขภาพและอาหารเสริมเกินจริง
+        {
+          level: 4,
+          difficultyLabel: "ระดับ 4/5 (รู้เท่าทันสื่อโฆษณา)",
+          topic: "การวิเคราะห์และรู้เท่าทันสื่อโฆษณาผลิตภัณฑ์สุขภาพเกินจริง",
+          rubric: "เกณฑ์เหตุผล: รู้เท่าทันกลยุทธ์การโฆษณาเกินจริง (เช่น อ้างผลลัพธ์รวดเร็วเกินจริง ใช้ภาพตัดต่อหรืออินฟลูเอนเซอร์ชักจูง) และยึดหลักวิทยาศาสตร์การเจริญเติบโตตามวัย",
+          cases: [
+            {
+              scenario: "โฆษณาบนโซเชียลมีเดียอ้างว่า 'เยลลี่เพิ่มความสูง สูตรลับจากต่างประเทศ กินวันละ 2 เม็ด สูงขึ้น 10 เซนติเมตรใน 1 เดือน ไม่ต้องออกกำลังกาย'",
+              stem: "จากหลักวิชาการด้านสุขภาพ ข้อใดวิเคราะห์โฆษณานี้ได้ถูกต้องที่สุด?",
+              options: [
+                { text: "เป็นการโฆษณาเกินจริง เพราะความสูงขึ้นอยู่กับพันธุกรรม อาหารครบ 5 หมู่ การออกกำลังกาย และการนอนหลับ ไม่มียาหรือเยลลี่ใดทำให้สูงเร็วขนาดนั้น", isCorrect: true },
+                { text: "น่าเชื่อถือ เพราะระบุจำนวนเซนติเมตรและระยะเวลาชัดเจน แสดงว่าผ่านการทดลองแล้ว", isCorrect: false },
+                { text: "ควรซื้อมากินคู่กับการกระโดดเชือก เพราะอย่างน้อยก็เป็นเยลลี่ที่ปลอดภัยสำหรับเด็ก", isCorrect: false },
+                { text: "น่าลองซื้อ 1 กล่อง เพราะเป็นสินค้าจากต่างประเทศย่อมมีคุณภาพดีกว่าอาหารไทย", isCorrect: false }
+              ],
+              explanation: "ไม่มีผลิตภัณฑ์เสริมอาหารใดสามารถเพิ่มความสูงได้ถึง 10 ซม. ใน 1 เดือน การโฆษณาที่รับประกันผลรวดเร็วเกินจริงเป็นสัญญาณของโฆษณาหลอกลวง ซึ่งอาจผสมสารอันตรายหรือน้ำตาลจำนวนมาก"
+            },
+            {
+              scenario: "อินฟลูเอนเซอร์ชื่อดังรีวิว 'ครีมทาผิวขาวเร่งด่วนใน 3 วัน' โดยโชว์ภาพแขนที่ขาวขึ้นมากหลังทา และบอกว่า 'เด็ก ป.4 ก็ใช้ได้ ปลอดภัย 100% ไม่มีสารอันตราย'",
+              stem: "นักเรียนควรใช้ทักษะการรู้เท่าทันสื่อตัดสินใจอย่างไร?",
+              options: [
+                { text: "ไม่หลงเชื่อและไม่ซื้อใช้ เพราะภาพรีวิวอาจใช้แสงหรือแอปปรับแต่ง และครีมที่อ้างขาวเร็วใน 3 วันมักมีสารอันตราย เช่น ปรอทหรือสเตียรอยด์", isCorrect: true },
+                { text: "เชื่อถือได้เพราะอินฟลูเอนเซอร์มีผู้ติดตามหลายแสนคน คงไม่กล้าโกหกแฟนคลับ", isCorrect: false },
+                { text: "ซื้อมาทดลองทากับหลังมือก่อน 1 วัน ถ้าไม่แสบคันแสดงว่าปลอดภัยใช้ทาทั้งตัวได้", isCorrect: false },
+                { text: "ชวนเพื่อนหารเงินกันซื้อกระปุกใหญ่ จะได้ประหยัดค่าใช้จ่ายและขาวพร้อมกัน", isCorrect: false }
+              ],
+              explanation: "ผู้มีชื่อเสียงในสื่อสังคมออนไลน์มักได้รับการว่าจ้างให้โฆษณา และภาพถ่ายสามารถตกแต่งได้ง่าย ครีมที่ทำให้สีผิวเปลี่ยนอย่างรวดเร็วในไม่กี่วันเสี่ยงปนเปื้อนสารห้ามใช้ที่ทำลายผิวหนังถาวร"
+            },
+            {
+              scenario: "คลิปวิดีโอโฆษณา 'น้ำผลไม้สกัดเข้มข้น บำรุงสมอง สอบได้ที่ 1 แน่นอน' โดยมีรูปเด็กใส่ชุดนักเรียนถือถ้วยรางวัลประกอบ พร้อมข้อความ 'เหลือเพียง 10 กล่องสุดท้าย รีบสั่งเลย!'",
+              stem: "กลยุทธ์ใดที่โฆษณานี้ใช้ชักจูงผู้บริโภค และนักเรียนควรตัดสินใจอย่างไร?",
+              options: [
+                { text: "ใช้ความอยากเรียนเก่งและความเร่งด่วนมากดดันให้รีบซื้อ นักเรียนไม่ควรเชื่อเพราะความจำที่ดีเกิดจากการทบทวนบทเรียน อาหารครบหมู่ และการพักผ่อน", isCorrect: true },
+                { text: "เป็นโอกาสดีที่เหลือ 10 กล่องสุดท้าย ควรรีบขอเงินผู้ปกครองซื้อทันทีก่อนสินค้าหมด", isCorrect: false },
+                { text: "ควรซื้อดื่มเฉพาะช่วงสัปดาห์สอบ เพราะน้ำผลไม้สกัดเข้มข้นช่วยเพิ่มความจำได้ชั่วคราว", isCorrect: false },
+                { text: "เชื่อถือได้เพราะมีภาพเด็กถือถ้วยรางวัลยืนยันผลลัพธ์จากการดื่มจริง", isCorrect: false }
+              ],
+              explanation: "โฆษณามักใช้คำพูดเร่งเร้า ('จำนวนจำกัด') และภาพความสำเร็จมาเชื่อมโยงกับสินค้า ทั้งที่ไม่มีเครื่องดื่มใดทำให้สอบได้ที่ 1 การเรียนรู้เกิดจากการฝึกฝนและดูแลสุขภาพอย่างสม่ำเสมอ"
+            },
+            {
+              scenario: "โฆษณา 'ลูกอมลดความอ้วน ไม่ต้องอดอาหาร ไม่ต้องออกกำลังกาย แค่อมหลังอาหาร น้ำหนักลด 5 กิโลกรัมใน 2 สัปดาห์'",
+              stem: "เหตุใดนักเรียนวัย ป.4 จึงไม่ควรซื้อผลิตภัณฑ์นี้มารับประทาน?",
+              options: [
+                { text: "เป็นการอวดอ้างสรรพคุณเกินจริงและเสี่ยงมีสารกดประสาทหรือยาระบายที่เป็นอันตราย วัยเด็กควรควบคุมน้ำหนักด้วยการกินอาหารมีประโยชน์และออกกำลังกาย", isCorrect: true },
+                { text: "เพราะลูกอมมีรสหวาน อาจทำให้ฟันผุได้ แต่เรื่องลดน้ำหนักสามารถใช้ได้จริง", isCorrect: false },
+                { text: "ควรปรึกษาเพื่อนที่เคยกินก่อน ถ้าเพื่อนน้ำหนักลดจริงจึงค่อยสั่งซื้อตาม", isCorrect: false },
+                { text: "สามารถกินได้ถ้าลดปริมาณเหลือแค่วันละครึ่งเม็ดเพื่อป้องกันผลข้างเคียง", isCorrect: false }
+              ],
+              explanation: "ผลิตภัณฑ์ลดน้ำหนักที่อ้างว่าลดได้เร็วโดยไม่ต้องปรับพฤติกรรมมักลักลอบใส่สารอันตราย (เช่น ไซบูทรามีนหรือยาระบาย) ซึ่งทำให้ใจสั่น ขาดน้ำ และเป็นอันตรายถึงชีวิต โดยเฉพาะในเด็กที่กำลังเจริญเติบโต"
+            }
+          ]
+        },
+
+        // ข้อ 5 (ระดับ 5 - ยาก/ประยุกต์วิเคราะห์หลายปัจจัย): บูรณาการการประเมินความเสี่ยง หลักปฐมพยาบาล/สาธารณสุข และการตัดสินใจในสถานการณ์ซับซ้อน
+        {
+          level: 5,
+          difficultyLabel: "ระดับ 5/5 (วิเคราะห์และตัดสินใจเชิงระบบ)",
+          topic: "การประเมินความเสี่ยงรอบด้านและการตัดสินใจเชิงเหตุผล",
+          rubric: "เกณฑ์เหตุผล: ประเมินผลกระทบหลายมิติ (ความปลอดภัยทางกาย หลักวิชาการสาธารณสุข และผลกระทบต่อตนเอง/ผู้อื่น) เพื่อเลือกทางออกที่รอบคอบและเป็นระบบที่สุด",
+          cases: [
+            {
+              scenario: "ระหว่างซ้อมวิ่งในคาบพละ อากาศร้อนอบอ้าว นนท์รู้สึกเวียนศีรษะ หน้ามืด เหงื่อออกมาก และหัวใจเต้นเร็ว เพื่อนคนหนึ่งแนะนำว่า 'ดื่มน้ำเย็นจัดรวดเดียวหมดขวดแล้ววิ่งต่อจะได้ชิน' ส่วนอีกคนบอกว่า 'กินยาแก้ปวดแล้วซ้อมต่อ'",
+              stem: "จากหลักการปฐมพยาบาลและการดูแลสุขภาพ นนท์ควรตัดสินใจอย่างไร?",
+              options: [
+                { text: "หยุดวิ่งทันที แจ้งคุณครูพละ นั่งพักในที่ร่มอากาศถ่ายเท คลายเสื้อผ้าให้หลวม และค่อย ๆ จิบน้ำสะอาดทีละน้อย", isCorrect: true },
+                { text: "ทำตามเพื่อนที่แนะนำให้ดื่มน้ำเย็นจัดรวดเดียวหมดขวด แล้วรีบวิ่งต่อให้ครบตามเวลา", isCorrect: false },
+                { text: "ขอยาแก้ปวดจากเพื่อนมากิน แล้วนั่งตากแดดพักสัก 2 นาทีก่อนลงวิ่งต่อ", isCorrect: false },
+                { text: "ฝืนวิ่งต่อไปเงียบ ๆ เพราะกลัวถูกเพื่อนล้อว่าอ่อนแอและกลัวโดนหักคะแนน", isCorrect: false }
+              ],
+              explanation: "อาการเวียนศีรษะ หน้ามืด และหัวใจเต้นเร็วขณะออกกำลังกายกลางแดดเป็นสัญญาณเตือนของภาวะเพลียแดด (Heat Exhaustion) ต้องหยุดพักในที่ร่ม แจ้งครู และจิบน้ำทีละน้อย ไม่ควรฝืนวิ่งหรือกินยาแก้ปวดโดยไม่จำเป็น"
+            },
+            {
+              scenario: "คิมเห็นโฆษณา 'ชุดตรวจสุขภาพและวิตามินบำรุงสายตาสำหรับเด็กติดจอ' ขายออนไลน์ราคาถูก เพื่อนในกลุ่มชวนกันสั่งซื้อมากินเองเพราะไม่อยากไปตรวจวัดสายตากับจักษุแพทย์หรือบอกผู้ปกครองว่ามองกระดานไม่ชัด",
+              stem: "การตัดสินใจใดของคิมที่ถูกต้องตามหลักการดูแลสุขภาพและปลอดภัยที่สุด?",
+              options: [
+                { text: "ไม่สั่งซื้อวิตามินมากินเอง บอกผู้ปกครองตามตรงเพื่อพาไปตรวจสายตากับผู้เชี่ยวชาญ และปรับพฤติกรรมพักสายตาทุก 20 นาที", isCorrect: true },
+                { text: "สั่งซื้อวิตามินมากินก่อน 1 เดือน ถ้าสายตายังไม่ชัดขึ้นจึงค่อยบอกผู้ปกครอง", isCorrect: false },
+                { text: "ขอยืมแว่นสายตาของเพื่อนมาใส่สลับกันเรียนหนังสือ เพื่อจะได้ไม่ต้องเสียเงินซื้อวิตามิน", isCorrect: false },
+                { text: "นั่งขยับโต๊ะไปติดกระดานหน้าห้องมากขึ้น โดยไม่ต้องบอกใครและไม่ต้องปรับเวลาเล่นจอ", isCorrect: false }
+              ],
+              explanation: "อาการมองไม่ชัดอาจเกิดจากสายตาสั้นหรือสายตาเอียง ซึ่งวิตามินไม่สามารถแก้ไขค่าสายตาได้ การบอกผู้ปกครองเพื่อตรวจกับจักษุแพทย์และการพักสายตาเป็นวิธีที่ตรงจุดและปลอดภัยที่สุด"
+            },
+            {
+              scenario: "ในงานวันเกิดเพื่อน มีทั้งน้ำอัดลม ขนมเค้กหวานจัด ไก่ทอด และผลไม้สด เพื่อนชวนกันแข่งกินเค้กและดื่มน้ำอัดลมให้เร็วที่สุดภายใน 3 นาที ใครกินหมดก่อนชนะ",
+              stem: "หากพิจารณาทั้งความปลอดภัยเฉพาะหน้าและสุขภาพระยะยาว นักเรียนควรตัดสินใจอย่างไร?",
+              options: [
+                { text: "ปฏิเสธการแข่งกินเร็วอย่างสุภาพ และเลือกรับประทานอาหารและผลไม้ในปริมาณพอเหมาะโดยเคี้ยวให้ละเอียด", isCorrect: true },
+                { text: "ร่วมแข่งกินเร็วเฉพาะเค้ก แต่ไม่ดื่มน้ำอัดลม เพราะจะได้ไม่จุกท้อง", isCorrect: false },
+                { text: "ร่วมแข่งให้ชนะเพื่อความสนุก แล้วค่อยไปล้วงคออาเจียนออกในห้องน้ำหลังแข่งเสร็จ", isCorrect: false },
+                { text: "ดื่มน้ำอัดลมแข่งอย่างเดียว เพราะเป็นของเหลวจึงไม่ทำให้สำลักหรือติดคอ", isCorrect: false }
+              ],
+              explanation: "การแข่งกินหรือดื่มอย่างรวดเร็วเสี่ยงต่อการสำลักอาหารอุดกั้นทางเดินหายใจ (Choking) และทำให้ปวดท้องจุกเสียด ส่วนการล้วงคออาเจียนทำลายหลอดอาหารและฟัน การปฏิเสธการแข่งและกินอย่างพอดีจึงปลอดภัยที่สุด"
+            },
+            {
+              scenario: "แก้มหกล้มเข่าถลอกมีเลือดซึมเล็กน้อยในสนามหญ้า เพื่อนหวังดีหยิบขวดน้ำสมุนไพรพื้นบ้านไม่มียี่ห้อที่พกติดตัวมาจะเทราดแผลให้ โดยบอกว่า 'ทาแล้วแผลแห้งเร็วกว่าล้างน้ำเปล่า'",
+              stem: "ตามหลักการปฐมพยาบาลบาดแผลถลอกที่ถูกต้อง แก้มควรตัดสินใจอย่างไร?",
+              options: [
+                { text: "ขอบคุณความหวังดีของเพื่อน แต่ปฏิเสธการใช้น้ำสมุนไพรที่ไม่สะอาด แล้วไปล้างแผลด้วยน้ำสะอาดและสบู่ที่ห้องพยาบาล", isCorrect: true },
+                { text: "ยอมให้เพื่อนเทราดแผล เพราะสมุนไพรมาจากธรรมชาติย่อมปลอดภัยและฆ่าเชื้อได้ดีกว่า", isCorrect: false },
+                { text: "ใช้ทิชชูแห้งเช็ดเลือดออกแรง ๆ แล้วปล่อยทิ้งไว้โดยไม่ต้องล้างน้ำแผลจะได้แห้งเร็ว", isCorrect: false },
+                { text: "ใช้ดินทรายสะอาดบริเวณสนามหญ้าโรยทับแผลไว้ชั่วคราวเพื่อห้ามเลือด", isCorrect: false }
+              ],
+              explanation: "แผลถลอกจากสนามหญ้ามีสิ่งสกปรกและเชื้อโรค ต้องล้างด้วยน้ำสะอาดและสบู่อ่อน ๆ เพื่อชะล้างเชื้อโรค แล้วใส่ยาฆ่าเชื้อที่มาตรฐาน (เช่น โพวิโดน-ไอโอดีน) การราดของเหลวที่ไม่ผ่านการฆ่าเชื้อเสี่ยงทำให้แผลติดเชื้อรุนแรง"
+            }
+          ]
+        }
+      ];
+
+      // =========================================================================
+      // 3. ฟังก์ชันสร้างชุดข้อสอบเฉพาะบุคคลตามเลขที่ (1-11)
+      // =========================================================================
+      function generateStudentExam(studentNo) {
+        const letters = ["ก", "ข", "ค", "ง"];
+        return QUESTION_BANK.map((qGroup, qIdx) => {
+          // เลือกกรณีศึกษา 1 จาก 4 โดยใช้ Seed ของเลขที่ + ข้อ
+          const caseSeed = computeSeed(studentNo, qIdx, 101);
+          const rng = mulberry32(caseSeed);
+          const caseIndex = Math.floor(rng() * qGroup.cases.length);
+          const chosenCase = qGroup.cases[caseIndex];
+
+          // สุ่มลำดับตัวเลือก 4 ข้ออย่างกำหนดซ้ำได้เมื่อเปิด Seed เดิม
+          const optSeed = computeSeed(studentNo, qIdx, 202);
+          const shuffledOptions = seededShuffle(chosenCase.options, optSeed).map((opt, idx) => ({
+            letter: letters[idx],
+            text: opt.text,
+            isCorrect: opt.isCorrect
+          }));
+
+          const correctIndex = shuffledOptions.findIndex((o) => o.isCorrect);
+
+          return {
+            qNumber: qIdx + 1,
+            level: qGroup.level,
+            difficultyLabel: qGroup.difficultyLabel,
+            topic: qGroup.topic,
+            rubric: qGroup.rubric,
+            caseIndex: caseIndex,
+            scenario: chosenCase.scenario,
+            stem: chosenCase.stem,
+            options: shuffledOptions,
+            correctIndex: correctIndex,
+            explanation: chosenCase.explanation
+          };
+        });
+      }
+
+      // คำนวณอัตราความไม่ซ้ำของชุดโจทย์ระหว่างเลขที่ 1-11
+      function calculateUniquenessSummary() {
+        const signatures = new Set();
+        for (let no = 1; no <= 11; no++) {
+          const exam = generateStudentExam(no);
+          const sig = exam.map((q) => `${q.caseIndex}-${q.correctIndex}`).join("|");
+          signatures.add(sig);
+        }
+        const uniquePct = Math.round((signatures.size / 11) * 100);
+        return `ชุดโจทย์เลขที่ 1–11 ไม่ซ้ำกัน ${signatures.size}/11 ชุด (${uniquePct}%)`;
+      }
+
+      // =========================================================================
+      // 4. State และการจัดการ LocalStorage อย่างปลอดภัย (try/catch)
+      // =========================================================================
+      const state = {
+        studentNo: null,
+        exam: [],
+        currentIdx: 0,
+        answers: [], // เก็บ index ของตัวเลือกที่เลือก (null = ยังไม่ตอบ)
+        submitted: false,
+        secondsLeft: 600, // 10 นาที
+        timerId: null
+      };
+
+      function safeSaveProgress() {
+        try {
+          if (!state.studentNo) return;
+          const payload = {
+            studentNo: state.studentNo,
+            answers: state.answers,
+            submitted: state.submitted
+          };
+          localStorage.setItem("health_p4_boyban_ypp", JSON.stringify(payload));
+        } catch (e) {
+          // ละเว้นอย่างปลอดภัยหาก Sandbox บล็อก localStorage
+        }
+      }
+
+      // =========================================================================
+      // 5. DOM References
+      // =========================================================================
+      const startSection = document.getElementById("startSection");
+      const quizSection = document.getElementById("quizSection");
+      const resultSection = document.getElementById("resultSection");
+
+      const studentNoInput = document.getElementById("studentNoInput");
+      const startErrorMsg = document.getElementById("startErrorMsg");
+      const startQuizBtn = document.getElementById("startQuizBtn");
+
+      const studentBadge = document.getElementById("studentBadge");
+      const diffBadge = document.getElementById("diffBadge");
+      const timerDisplay = document.getElementById("timerDisplay");
+      const progressFill = document.getElementById("progressFill");
+      const qNavDots = document.getElementById("qNavDots");
+      const topicTag = document.getElementById("topicTag");
+      const scenarioText = document.getElementById("scenarioText");
+      const questionStem = document.getElementById("questionStem");
+      const optionsContainer = document.getElementById("optionsContainer");
+      const instantFeedbackBox = document.getElementById("instantFeedbackBox");
+      const quizWarnMsg = document.getElementById("quizWarnMsg");
+
+      const prevBtn = document.getElementById("prevBtn");
+      const nextBtn = document.getElementById("nextBtn");
+      const submitBtn = document.getElementById("submitBtn");
+
+      const resultStudentLabel = document.getElementById("resultStudentLabel");
+      const scoreDisplay = document.getElementById("scoreDisplay");
+      const encouragementText = document.getElementById("encouragementText");
+      const reviewContainer = document.getElementById("reviewContainer");
+      const retryBtn = document.getElementById("retryBtn");
+      const changeStudentBtn = document.getElementById("changeStudentBtn");
+
+      // Teacher Modal
+      const openTeacherBtn = document.getElementById("openTeacherBtn");
+      const closeTeacherBtn = document.getElementById("closeTeacherBtn");
+      const teacherModal = document.getElementById("teacherModal");
+      const teacherStudentSelect = document.getElementById("teacherStudentSelect");
+      const teacherInspectBtn = document.getElementById("teacherInspectBtn");
+      const uniquenessStat = document.getElementById("uniquenessStat");
+      const teacherPreviewContainer = document.getElementById("teacherPreviewContainer");
+
+      // =========================================================================
+      // 6. การควบคุมเวลา (10 นาที)
+      // =========================================================================
+      function formatTime(sec) {
+        const m = Math.floor(sec / 60);
+        const s = sec % 60;
+        return `${String(m).padStart(2, "0")}:${String(s).padStart(2, "0")}`;
+      }
+
+      function stopTimer() {
+        if (state.timerId !== null) {
+          clearInterval(state.timerId);
+          state.timerId = null;
+        }
+      }
+
+      function startTimer() {
+        stopTimer();
+        state.secondsLeft = 600;
+        timerDisplay.classList.remove("urgent");
+        timerDisplay.textContent = `เวลาที่เหลือ ${formatTime(state.secondsLeft)}`;
+
+        state.timerId = setInterval(() => {
+          state.secondsLeft -= 1;
+          if (state.secondsLeft <= 60) {
+            timerDisplay.classList.add("urgent");
+          }
+          if (state.secondsLeft <= 0) {
+            state.secondsLeft = 0;
+            timerDisplay.textContent = "หมดเวลา 00:00";
+            stopTimer();
+            finalizeQuiz(true);
+            return;
+          }
+          timerDisplay.textContent = `เวลาที่เหลือ ${formatTime(state.secondsLeft)}`;
+        }, 1000);
+      }
+
+      // =========================================================================
+      // 7. การเริ่มต้นและเรนเดอร์โจทย์ (ใช้ textContent ป้องกัน XSS)
+      // =========================================================================
+      function showError(el, msg) {
+        el.textContent = msg;
+        el.classList.remove("hidden");
+      }
+
+      function hideError(el) {
+        el.textContent = "";
+        el.classList.add("hidden");
+      }
+
+      function beginActivity(studentNo) {
+        state.studentNo = studentNo;
+        state.exam = generateStudentExam(studentNo);
+        state.currentIdx = 0;
+        state.answers = new Array(state.exam.length).fill(null);
+        state.submitted = false;
+
+        hideError(startErrorMsg);
+        hideError(quizWarnMsg);
+
+        startSection.classList.add("hidden");
+        resultSection.classList.add("hidden");
+        quizSection.classList.remove("hidden");
+
+        studentBadge.textContent = `นักเรียนเลขที่ ${studentNo}`;
+        startTimer();
+        renderQuestion();
+        safeSaveProgress();
+      }
+
+      function renderNavDots() {
+        qNavDots.textContent = "";
+        state.exam.forEach((q, idx) => {
+          const btn = document.createElement("button");
+          btn.type = "button";
+          btn.className = "q-dot";
+          if (idx === state.currentIdx) btn.classList.add("active");
+          if (state.answers[idx] !== null) btn.classList.add("answered");
+          btn.textContent = String(idx + 1);
+          btn.setAttribute("aria-label", `ไปยังข้อที่ ${idx + 1}`);
+          btn.addEventListener("click", () => {
+            hideError(quizWarnMsg);
+            state.currentIdx = idx;
+            renderQuestion();
+          });
+          qNavDots.appendChild(btn);
+        });
+      }
+
+      function renderInstantFeedback(q, selectedOptIdx) {
+        if (selectedOptIdx === null) {
+          instantFeedbackBox.classList.add("hidden");
+          instantFeedbackBox.textContent = "";
+          return;
+        }
+
+        const isRight = selectedOptIdx === q.correctIndex;
+        instantFeedbackBox.classList.remove("hidden");
+        instantFeedbackBox.classList.toggle("needs-review", !isRight);
+        instantFeedbackBox.textContent = "";
+
+        const titleEl = document.createElement("div");
+        titleEl.style.fontWeight = "700";
+        titleEl.style.marginBottom = "4px";
+        titleEl.style.color = isRight ? "#15803d" : "#b45309";
+        titleEl.textContent = isRight
+          ? "เยี่ยมมาก! นักเรียนเลือกแนวทางที่ปลอดภัยและเหมาะสม"
+          : "ลองทบทวนมุมมองด้านสุขภาพเพิ่มเติมนะ (สามารถเปลี่ยนคำตอบได้ในโหมดฝึกซ้อม)";
+
+        const expEl = document.createElement("div");
+        expEl.textContent = `เหตุผลทางสุขศึกษา: ${q.explanation}`;
+
+        instantFeedbackBox.appendChild(titleEl);
+        instantFeedbackBox.appendChild(expEl);
+      }
+
+      function renderQuestion() {
+        const q = state.exam[state.currentIdx];
+        const total = state.exam.length;
+
+        diffBadge.textContent = q.difficultyLabel;
+        progressFill.style.width = `${((state.currentIdx + 1) / total) * 100}%`;
+        topicTag.textContent = `ข้อที่ ${q.qNumber} จาก ${total} • ${q.topic}`;
+        scenarioText.textContent = `สถานการณ์: ${q.scenario}`;
+        questionStem.textContent = q.stem;
+
+        renderNavDots();
+
+        optionsContainer.textContent = "";
+        const selectedOpt = state.answers[state.currentIdx];
+
+        q.options.forEach((opt, optIdx) => {
+          const btn = document.createElement("button");
+          btn.type = "button";
+          btn.className = "option-item";
+          if (selectedOpt === optIdx) {
+            btn.classList.add("selected");
+          }
+
+          const letterSpan = document.createElement("span");
+          letterSpan.className = "option-letter";
+          letterSpan.textContent = opt.letter;
+
+          const textSpan = document.createElement("span");
+          textSpan.textContent = opt.text;
+
+          btn.appendChild(letterSpan);
+          btn.appendChild(textSpan);
+
+          btn.addEventListener("click", () => {
+            hideError(quizWarnMsg);
+            state.answers[state.currentIdx] = optIdx;
+            safeSaveProgress();
+            renderQuestion();
+          });
+
+          optionsContainer.appendChild(btn);
+        });
+
+        renderInstantFeedback(q, selectedOpt);
+
+        prevBtn.disabled = state.currentIdx === 0;
+        if (state.currentIdx === total - 1) {
+          nextBtn.classList.add("hidden");
+          submitBtn.classList.remove("hidden");
+        } else {
+          nextBtn.classList.remove("hidden");
+          submitBtn.classList.add("hidden");
+        }
+      }
+
+      // =========================================================================
+      // 8. ตรวจคำตอบและแสดงหน้าสรุปผล + Rubric
+      // =========================================================================
+      function finalizeQuiz(isTimeOut) {
+        if (!isTimeOut) {
+          const unansweredIdx = state.answers.findIndex((a) => a === null);
+          if (unansweredIdx !== -1) {
+            showError(
+              quizWarnMsg,
+              `นักเรียนยังไม่ได้เลือกคำตอบในข้อที่ ${unansweredIdx + 1} กรุณาตอบให้ครบทั้ง 5 ข้อก่อนกดส่งนะครับ`
+            );
+            state.currentIdx = unansweredIdx;
+            renderQuestion();
+            return;
+          }
+        }
+
+        stopTimer();
+        state.submitted = true;
+        safeSaveProgress();
+
+        let score = 0;
+        state.exam.forEach((q, idx) => {
+          if (state.answers[idx] === q.correctIndex) {
+            score += 1;
+          }
+        });
+
+        quizSection.classList.add("hidden");
+        resultSection.classList.remove("hidden");
+
+        resultStudentLabel.textContent = `ผลการฝึกทักษะ • นักเรียนเลขที่ ${state.studentNo}${isTimeOut ? " (หมดเวลาทำกิจกรรม)" : ""}`;
+        scoreDisplay.textContent = `${score} / ${state.exam.length} คะแนน`;
+
+        if (score === 5) {
+          encouragementText.textContent = "ยอดเยี่ยมมาก! นักเรียนตัดสินใจดูแลสุขภาพ ปฏิเสธความเสี่ยง และรู้เท่าทันสื่อได้อย่างรอบคอบครบทุกข้อ";
+        } else if (score >= 3) {
+          encouragementText.textContent = "ทำได้ดีมาก! นักเรียนเข้าใจหลักการดูแลสุขภาพส่วนใหญ่แล้ว ลองอ่านคำอธิบายเพิ่มเติมในข้อที่ยังคลาดเคลื่อนเพื่อพัฒนาต่อนะ";
+        } else {
+          encouragementText.textContent = "เป็นการเริ่มต้นฝึกฝนที่ดีมาก! การเรียนรู้เรื่องสุขภาพต้องอาศัยการฝึกคิดวิเคราะห์ ลองอ่านเฉลยด้านล่างแล้วกดลองทำใหม่อีกครั้งได้เลย";
+        }
+
+        renderReviewCards();
+      }
+
+      function renderReviewCards() {
+        reviewContainer.textContent = "";
+        state.exam.forEach((q, idx) => {
+          const userAnsIdx = state.answers[idx];
+          const isCorrect = userAnsIdx === q.correctIndex;
+          const correctOpt = q.options[q.correctIndex];
+          const userOpt = userAnsIdx !== null ? q.options[userAnsIdx] : null;
+
+          const card = document.createElement("div");
+          card.className = "review-card";
+
+          const headerRow = document.createElement("div");
+          headerRow.style.display = "flex";
+          headerRow.style.justifyContent = "space-between";
+          headerRow.style.alignItems = "center";
+          headerRow.style.marginBottom = "8px";
+          headerRow.style.flexWrap = "wrap";
+          headerRow.style.gap = "6px";
+
+          const qTitle = document.createElement("strong");
+          qTitle.textContent = `ข้อที่ ${q.qNumber} (${q.difficultyLabel})`;
+
+          const statusTag = document.createElement("span");
+          statusTag.className = "badge";
+          statusTag.style.background = isCorrect ? "var(--success-bg)" : "var(--warn-bg)";
+          statusTag.style.color = isCorrect ? "#15803d" : "#b45309";
+          statusTag.textContent = isCorrect ? "ตอบถูกต้อง" : "ควรทบทวนเพิ่มเติม";
+
+          headerRow.appendChild(qTitle);
+          headerRow.appendChild(statusTag);
+
+          const scenP = document.createElement("p");
+          scenP.style.fontSize = "0.93rem";
+          scenP.style.color = "#334155";
+          scenP.style.marginBottom = "6px";
+          scenP.textContent = `สถานการณ์: ${q.scenario}`;
+
+          const stemP = document.createElement("p");
+          stemP.style.fontWeight = "600";
+          stemP.style.marginBottom = "8px";
+          stemP.textContent = `คำถาม: ${q.stem}`;
+
+          const userChoiceP = document.createElement("p");
+          userChoiceP.style.fontSize = "0.92rem";
+          userChoiceP.style.marginBottom = "4px";
+          userChoiceP.style.color = isCorrect ? "#15803d" : "#b91c1c";
+          userChoiceP.textContent = userOpt
+            ? `คำตอบที่นักเรียนเลือก: (${userOpt.letter}) ${userOpt.text}`
+            : "คำตอบที่นักเรียนเลือก: ไม่ได้เลือกคำตอบ";
+
+          const correctChoiceP = document.createElement("p");
+          correctChoiceP.style.fontSize = "0.92rem";
+          correctChoiceP.style.fontWeight = "600";
+          correctChoiceP.style.color = "#15803d";
+          correctChoiceP.style.marginBottom = "8px";
+          correctChoiceP.textContent = `เฉลยที่เหมาะสมที่สุด: (${correctOpt.letter}) ${correctOpt.text}`;
+
+          const expP = document.createElement("p");
+          expP.style.fontSize = "0.92rem";
+          expP.style.color = "#1e293b";
+          expP.textContent = `คำอธิบายเหตุผล: ${q.explanation}`;
+
+          const rubricDiv = document.createElement("div");
+          rubricDiv.className = "rubric-box";
+          rubricDiv.textContent = q.rubric;
+
+          card.appendChild(headerRow);
+          card.appendChild(scenP);
+          card.appendChild(stemP);
+          card.appendChild(userChoiceP);
+          card.appendChild(correctChoiceP);
+          card.appendChild(expP);
+          card.appendChild(rubricDiv);
+
+          reviewContainer.appendChild(card);
+        });
+      }
+
+      // =========================================================================
+      // 9. โหมดครู (Teacher Inspection Modal)
+      // =========================================================================
+      function renderTeacherPreview(studentNo) {
+        teacherPreviewContainer.textContent = "";
+        const num = Number(studentNo);
+        if (!Number.isInteger(num) || num < 1 || num > 11) {
+          const err = document.createElement("div");
+          err.className = "alert-msg";
+          err.textContent = "กรุณาระบุเลขที่นักเรียนระหว่าง 1 ถึง 11 เท่านั้น";
+          teacherPreviewContainer.appendChild(err);
+          return;
+        }
+
+        const exam = generateStudentExam(num);
+        const heading = document.createElement("div");
+        heading.style.fontWeight = "700";
+        heading.style.marginBottom = "12px";
+        heading.style.color = "var(--primary-dark)";
+        heading.textContent = `ชุดโจทย์และเฉลยสำหรับนักเรียนเลขที่ ${num} (Seed คงที่ เปิดซ้ำได้ชุดเดิม 100%)`;
+        teacherPreviewContainer.appendChild(heading);
+
+        exam.forEach((q) => {
+          const box = document.createElement("div");
+          box.className = "review-card";
+          box.style.marginBottom = "12px";
+
+          const top = document.createElement("div");
+          top.style.fontWeight = "700";
+          top.style.marginBottom = "4px";
+          top.textContent = `ข้อ ${q.qNumber} [${q.difficultyLabel}] • กรณีศึกษาชุดที่ ${q.caseIndex + 1}/4`;
+
+          const scen = document.createElement("div");
+          scen.style.fontSize = "0.9rem";
+          scen.style.marginBottom = "4px";
+          scen.textContent = `สถานการณ์: ${q.scenario}`;
+
+          const stem = document.createElement("div");
+          stem.style.fontWeight = "600";
+          stem.style.fontSize = "0.92rem";
+          stem.style.marginBottom = "6px";
+          stem.textContent = `คำถาม: ${q.stem}`;
+
+          const optList = document.createElement("ul");
+          optList.style.paddingLeft = "20px";
+          optList.style.fontSize = "0.88rem";
+          optList.style.marginBottom = "6px";
+          q.options.forEach((o) => {
+            const li = document.createElement("li");
+            li.textContent = `(${o.letter}) ${o.text}${o.isCorrect ? "  [✓ เฉลย]" : ""}`;
+            if (o.isCorrect) {
+              li.style.fontWeight = "700";
+              li.style.color = "#15803d";
+            }
+            optList.appendChild(li);
+          });
+
+          const exp = document.createElement("div");
+          exp.style.fontSize = "0.86rem";
+          exp.style.color = "#334155";
+          exp.textContent = `เหตุผล: ${q.explanation}`;
+
+          const rub = document.createElement("div");
+          rub.className = "rubric-box";
+          rub.textContent = q.rubric;
+
+          box.appendChild(top);
+          box.appendChild(scen);
+          box.appendChild(stem);
+          box.appendChild(optList);
+          box.appendChild(exp);
+          box.appendChild(rub);
+          teacherPreviewContainer.appendChild(box);
+        });
+      }
+
+      // =========================================================================
+      // 10. Event Listeners
+      // =========================================================================
+      startQuizBtn.addEventListener("click", () => {
+        const rawVal = studentNoInput.value.trim();
+        const num = Number(rawVal);
+        if (!rawVal || !Number.isInteger(num) || num < 1 || num > 11) {
+          showError(startErrorMsg, "กรุณากรอกเลขที่นักเรียนเป็นตัวเลขจำนวนเต็มตั้งแต่ 1 ถึง 11 นะครับ");
+          studentNoInput.focus();
+          return;
+        }
+        beginActivity(num);
+      });
+
+      studentNoInput.addEventListener("keydown", (e) => {
+        if (e.key === "Enter") {
+          startQuizBtn.click();
+        }
+      });
+
+      prevBtn.addEventListener("click", () => {
+        if (state.currentIdx > 0) {
+          hideError(quizWarnMsg);
+          state.currentIdx -= 1;
+          renderQuestion();
+        }
+      });
+
+      nextBtn.addEventListener("click", () => {
+        if (state.currentIdx < state.exam.length - 1) {
+          hideError(quizWarnMsg);
+          state.currentIdx += 1;
+          renderQuestion();
+        }
+      });
+
+      submitBtn.addEventListener("click", () => {
+        finalizeQuiz(false);
+      });
+
+      retryBtn.addEventListener("click", () => {
+        if (state.studentNo) {
+          beginActivity(state.studentNo);
+        }
+      });
+
+      changeStudentBtn.addEventListener("click", () => {
+        stopTimer();
+        resultSection.classList.add("hidden");
+        quizSection.classList.add("hidden");
+        startSection.classList.remove("hidden");
+        studentNoInput.value = "";
+        hideError(startErrorMsg);
+        studentNoInput.focus();
+      });
+
+      openTeacherBtn.addEventListener("click", () => {
+        uniquenessStat.textContent = calculateUniquenessSummary();
+        const defaultNo = state.studentNo || 1;
+        teacherStudentSelect.value = String(defaultNo);
+        renderTeacherPreview(defaultNo);
+        teacherModal.classList.remove("hidden");
+      });
+
+      closeTeacherBtn.addEventListener("click", () => {
+        teacherModal.classList.add("hidden");
+      });
+
+      teacherModal.addEventListener("click", (e) => {
+        if (e.target === teacherModal) {
+          teacherModal.classList.add("hidden");
+        }
+      });
+
+      teacherInspectBtn.addEventListener("click", () => {
+        renderTeacherPreview(teacherStudentSelect.value);
+      });
+
+      teacherStudentSelect.addEventListener("change", () => {
+        renderTeacherPreview(teacherStudentSelect.value);
+      });
+    })();
+  </script>
+</body>
+</html>
